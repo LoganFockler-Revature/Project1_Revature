@@ -59,6 +59,7 @@ namespace Project1v2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,OwnerId,type,Amount")] Account account)
         {
+            account.type = Account.Types.Checking;
             account.OwnerId = _userManager.GetUserId(User);
             if (ModelState.IsValid)
             {
@@ -68,6 +69,105 @@ namespace Project1v2.Controllers
             }
             return View(account);
         }
+
+        public async Task<IActionResult> Withdraw(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            return View(account);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Withdraw(int? id, double withdraw)
+        {
+            
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var account = await _context.Accounts.FindAsync(id);
+            if(account.Amount - withdraw >= 0)
+            {
+                account.Amount = account.Amount - withdraw;
+            }
+           
+            try
+            {
+                _context.Update(account);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AccountExists(account.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        public async Task<IActionResult> Deposit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            return View(account);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Deposit(int? id, double deposit)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var account = await _context.Accounts.FindAsync(id);
+           
+            account.Amount = account.Amount + deposit;
+
+            try
+            {
+                _context.Update(account);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AccountExists(account.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
 
         // GET: Accounts/Edit/5
         public async Task<IActionResult> Edit(int? id)

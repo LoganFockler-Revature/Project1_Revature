@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BankModels.TermDepositAccount>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Maturity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Maturity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @if (item.Maturity < DateTime.Today)
+                {
+                    <a asp-action="Withdraw" asp-route-id="@item.Id">Withdraw</a> 
+                }
+                    
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @if (item.Maturity < DateTime.Today)
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id">Close</a>
+                }
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,57 @@
+﻿@model BankModels.BusinessAccount
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>BusinessAccount</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Overdraft)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Overdraft)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OverdraftCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OverdraftCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OverdraftDueDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OverdraftDueDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+    </dl>
+
+    <h4>Business accounts can be overdrafted, overdrafts are taxed at 0.08*, if an overdraft payment is late an extra fee of $300 will be added for each 30 days past due</h4>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

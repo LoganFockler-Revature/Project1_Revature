@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BankModels.LoanAccount>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MonthlyDue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonthlyDue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                <a asp-action="Deposit" asp-route-id="@item.Id">Deposit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @if (item.Amount <= 0)
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id">Close</a>
+                }
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

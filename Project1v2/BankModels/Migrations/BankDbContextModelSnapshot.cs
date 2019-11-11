@@ -29,6 +29,10 @@ namespace BankModels.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(max)");
 
@@ -43,6 +47,8 @@ namespace BankModels.Migrations
                     b.HasIndex("TransactionId");
 
                     b.ToTable("Accounts");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Account");
                 });
 
             modelBuilder.Entity("BankModels.Transaction", b =>
@@ -61,6 +67,42 @@ namespace BankModels.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("BankModels.BusinessAccount", b =>
+                {
+                    b.HasBaseType("BankModels.Account");
+
+                    b.Property<double>("Overdraft")
+                        .HasColumnType("float");
+
+                    b.Property<double>("OverdraftCost")
+                        .HasColumnType("float");
+
+                    b.Property<double>("OverdraftDueDate")
+                        .HasColumnType("float");
+
+                    b.HasDiscriminator().HasValue("BusinessAccount");
+                });
+
+            modelBuilder.Entity("BankModels.LoanAccount", b =>
+                {
+                    b.HasBaseType("BankModels.Account");
+
+                    b.Property<double>("MonthlyDue")
+                        .HasColumnType("float");
+
+                    b.HasDiscriminator().HasValue("LoanAccount");
+                });
+
+            modelBuilder.Entity("BankModels.TermDepositAccount", b =>
+                {
+                    b.HasBaseType("BankModels.Account");
+
+                    b.Property<DateTime>("Maturity")
+                        .HasColumnType("datetime2");
+
+                    b.HasDiscriminator().HasValue("TermDepositAccount");
                 });
 
             modelBuilder.Entity("BankModels.Account", b =>
