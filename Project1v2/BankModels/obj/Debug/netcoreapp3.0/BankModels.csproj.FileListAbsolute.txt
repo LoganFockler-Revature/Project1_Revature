@@ -1,0 +1,8 @@
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\bin\Debug\netcoreapp3.0\BankModels.deps.json
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\bin\Debug\netcoreapp3.0\BankModels.dll
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\obj\Debug\netcoreapp3.0\BankModels.csprojAssemblyReference.cache
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\obj\Debug\netcoreapp3.0\BankModels.AssemblyInfoInputs.cache
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\obj\Debug\netcoreapp3.0\BankModels.AssemblyInfo.cs
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\bin\Debug\netcoreapp3.0\BankModels.pdb
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\obj\Debug\netcoreapp3.0\BankModels.dll
+C:\Users\logan\Desktop\Revature\Project1\Project1v2\BankModels\obj\Debug\netcoreapp3.0\BankModels.pdb
